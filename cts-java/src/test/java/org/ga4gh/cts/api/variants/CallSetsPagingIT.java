@@ -81,14 +81,14 @@ public class CallSetsPagingIT {
         final String variantSetId = Utils.getVariantSetId(client);
         final List<CallSet> listOfCallSets = Utils.getAllCallSets(client, variantSetId);
 
-        // page through the variants in one gulp
+        // page through the CallSets in one gulp
         checkSinglePageOfCallSets(variantSetId,
                                   listOfCallSets.size(),
                                   listOfCallSets);
     }
 
     /**
-     * Check that we can page through the variants we receive from
+     * Check that we can page through the CallSets we receive from
      * {@link org.ga4gh.ctk.transport.protocols.Client.Variants#searchCallSets
      * (SearchCallSetsRequest)}
      * using an increment twice as large as the non-paged set of results.
