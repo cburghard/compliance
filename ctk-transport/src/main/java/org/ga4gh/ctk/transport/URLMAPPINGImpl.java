@@ -71,7 +71,7 @@ public class URLMAPPINGImpl implements URLMAPPING {
         defaultEndpoints.put("ctk.tgt.getVariant", "variants/{id}");
         defaultEndpoints.put("ctk.tgt.getVariantSet", "variantsets/{id}");
         defaultEndpoints.put("ctk.tgt.getCallset", "callsets/{id}");
-
+        defaultEndpoints.put("ctk.tgt.searchRnaQuantification", "rnaquantification/search");
         dumpToStdOut = Boolean.getBoolean("ctk.tgt.urlmapper.dump"); // so, -Dctk.tgt.urlmapper.dump=true
 
         log.info("set default URLMAPPING urlRoot to " + defaultEndpoints.get("ctk.tgt.urlRoot"));
@@ -420,5 +420,29 @@ public class URLMAPPINGImpl implements URLMAPPING {
     @Override
     public void setEndpoints(Map<String, String> newEndpoints) {
         endpoints = newEndpoints;
+    }
+    //TODO added by cburghard
+    @Override
+    public String getSearchRnaQuantification() { return endpoints.get("ctk.tgt.searchRnaQuantification"); }
+
+    @Override
+    public void setSearchRnaQuantification(String searchRnaQuantification) {
+        endpoints.put("ctk.tgt.searchRnaQuantification", searchRnaQuantification);
+    }
+
+    @Override
+    public String getSearchExpressionLevel() { return endpoints.get("ctk.tgt.searchExpressionLevel"); }
+
+    @Override
+    public void setSearchExpressionLevel(String searchExpressionLevel) {
+        endpoints.put("ctk.tgt.searchExpressionLevel", searchExpressionLevel);
+    }
+
+    @Override
+    public String getSearchFeatureGroup() { return endpoints.get("ctk.tgt.searchFeatureGroup"); }
+
+    @Override
+    public void setSearchFeatureGroup(String searchFeatureGroup) {
+        endpoints.put("ctk.tgt.searchFeatureGroup", searchFeatureGroup);
     }
 }

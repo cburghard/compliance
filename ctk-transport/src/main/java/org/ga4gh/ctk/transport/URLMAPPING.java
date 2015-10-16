@@ -91,6 +91,18 @@ public interface URLMAPPING {
 
     void setEndpoints(Map<String, String> endpoints);
 
+    String getSearchRnaQuantification();
+
+    void setSearchRnaQuantification(String searchRnaQuantification);
+
+    String getSearchExpressionLevel();
+
+    void setSearchExpressionLevel(String searchExpressionLevel);
+
+    String getSearchFeatureGroup();
+
+    void setSearchFeatureGroup(String searchFeatureGroup);
+
     /**
      * load with default properties
      */
@@ -98,7 +110,7 @@ public interface URLMAPPING {
 
     /**
      * <p>Initialize URLMAPPING.</p>
-     * <p>Given a resource name, this loads (in order):
+     * <p>Given a resource name, this looks loads (in order):
      * <ul>
      * <li>a properties file of that name on the classpath</li>
      * <li>a properties file of that name from the file system</li>

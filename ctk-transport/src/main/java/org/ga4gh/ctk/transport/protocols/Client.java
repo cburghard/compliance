@@ -18,6 +18,7 @@ import java.util.Map;
  * <li>{@link #reads reads}</li>
  * <li>{@link #variants variants}</li>
  * <li>{@link #references references}</li>
+ * <li>{@link #rnaquantification rnaquantification}</li>
  * </ul>
  *
  * @author Herb Jellinek
@@ -51,6 +52,11 @@ public class Client {
      * </pre>
      */
     public final References references = new References();
+
+    /**
+     * Provides access to rna-related methods. TODO: example
+     */
+    public final RnaQuantification rnaquantification = new RnaQuantification();
 
     /**
      * Create a new client that can make requests on a GA4GH server.
@@ -111,6 +117,16 @@ public class Client {
             return response;
         }
 
+        @Override
+        public SearchVariantSetSequencesResponse searchVariantSetSequences(String variantSetId, SearchVariantSetSequencesRequest request) throws AvroRemoteException, GAException {
+            return null;
+        }
+
+        @Override
+        public Segment getVariantSetSequence(String variantSetId, String sequenceId) throws AvroRemoteException, GAException {
+            return null;
+        }
+
         /**
          * Gets a list of {@link VariantSet} matching the search criteria.
          * <p>
@@ -159,6 +175,16 @@ public class Client {
             final AvroJson aj = new AvroJson<>(response, urls.getUrlRoot(), path);
             response = (Variant)aj.doGetResp(id);
             return response;
+        }
+
+        @Override
+        public SearchAllelesResponse searchAlleles(SearchAllelesRequest request) throws AvroRemoteException, GAException {
+            return null;
+        }
+
+        @Override
+        public Allele getAllele(String id) throws AvroRemoteException, GAException {
+            return null;
         }
 
         /**
@@ -229,7 +255,39 @@ public class Client {
         }
     }
 
+
     /**
+     * Inner class holding all rna-related methods.  Gathering them in an inner class like this
+     * makes it a little easier for someone writing tests to use their IDE's auto-complete
+     * to type method names.  Added by cburghard 10/7/15.
+     */
+    public class RnaQuantification implements RnaQuantificationMethods {
+
+        @Override
+        public SearchRnaQuantificationResponse searchRnaQuantification(SearchRnaQuantificationRequest request)
+                throws AvroRemoteException, GAException {
+            String path = urls.getSearchRnaQuantification();
+            System.err.println("*****"+path);
+            SearchRnaQuantificationResponse response = new SearchRnaQuantificationResponse();
+            final AvroJson aj =
+                    new AvroJson<>(request, response, urls.getUrlRoot(), path, wireTracker);
+            response = (SearchRnaQuantificationResponse)aj.doPostResp();
+            return response;
+        }
+
+        @Override
+        public SearchExpressionLevelResponse searchExpressionLevel(SearchExpressionLevelRequest request)
+                throws AvroRemoteException, GAException {
+            return null;
+        }
+
+        @Override
+        public SearchFeatureGroupResponse searchFeatureGroup(SearchFeatureGroupRequest request)
+                throws AvroRemoteException, GAException {
+            return null;
+        }
+    }
+        /**
      * Inner class holding all reads-related methods.  Gathering them in an inner class like this
      * makes it a little easier for someone writing tests to use their IDE's auto-complete
      * to type method names.
